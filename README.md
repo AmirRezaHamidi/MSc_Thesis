@@ -7,4 +7,4 @@ Matlab section contains Pre Processing steps including:
    
 
 Python section contains classification steps
-  -the Classifier is written in both KERAS and Pytorch
+   -the Classifier is written in both KERAS and Pytorch
