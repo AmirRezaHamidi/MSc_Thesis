@@ -22,7 +22,6 @@ Network_Data = imageDatastore(Network_Data_Folder, ...
                               "LabelSource","foldernames");
 
 Input_Size = size(imread(Network_Data.Files{1}));
-
 Network_Data = shuffle(Network_Data);
 [Train_Data, Validation_Data] = splitEachLabel(Network_Data, 0.9);
 
@@ -96,5 +95,5 @@ switch See_Network
 end
 
 % Training the Network
-CNNModel = trainNetwork(Train_Data, layers, options);
+% CNNModel = trainNetwork(Train_Data, layers, options);
 %% The End :)
