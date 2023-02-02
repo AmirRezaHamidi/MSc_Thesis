@@ -5,6 +5,7 @@ if ~exist(Folder, "dir")
     error("Directory Does Not Exists")
 
 end
+
 Network_Data_Folder_Content = dir(Folder);
 Categories = string(ones(1, length(Network_Data_Folder_Content) - 2));
 

@@ -12,7 +12,7 @@ for Subject = 1:N_S
     Current_Subject = Subjects_Information(Subject).Subejct_Information;
     N_R = length(Current_Subject);
 
-    for Record=1:N_R
+    for Record = 1:N_R
 
         Current_Record = Current_Subject(Record);
 
@@ -26,8 +26,8 @@ for Subject = 1:N_S
         
     end
     
-    Sorted_Preidctal_Preiods = sort(Best_Preictal_Preiod, 'descend');
-    Max_of_Bests(:, Subject) = Sorted_Preidctal_Preiods(N);
+    Sorted_Preictal_Preiods = sort(Best_Preictal_Preiod, 'descend');
+    Max_of_Bests(Subject) = Sorted_Preictal_Preiods(N);
     
 end
 

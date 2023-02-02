@@ -1,20 +1,16 @@
+%% Resovling Environment
+addpath("Functions")
 close all; clear; clc
+
 %% Parameter Initialization
 
-addpath("Functions")
-Folder_to_Train = "Network_Data/Yes_No_Classification";
+Folder_to_Train = fullfile("Network_Data\1Minutes\");
 Network_Data_Folder = Network_Address_Handler(Folder_to_Train);
 
 %% Deep Convolutional Neural Network Construction
 
 % Data Properties
 Channel_Division = 3;
-
-% Network Properties
-Learning_Rate = 1e-4;
-Number_Of_Epochs = 60;
-Mini_Batch_Size = 75;
-Validation_Frequency = 36;
 
 % Load Data Image
 Network_Data = imageDatastore(Network_Data_Folder, ...
@@ -72,6 +68,12 @@ layers = [
     % output layer
     classificationLayer];
 
+% Network Properties
+Learning_Rate = 1e-4;
+Number_Of_Epochs = 60;
+Mini_Batch_Size = 73;
+Validation_Frequency = floor(size(Train_Data.Files, 1) / Mini_Batch_Size);
+
 % Training Options
 options = trainingOptions("adam", ...
                           "InitialLearnRate", Learning_Rate, ...
@@ -81,19 +83,17 @@ options = trainingOptions("adam", ...
                           "ValidationData", Validation_Data, ...
                           "Plots","training-progress");
 
-Message = "Do You Want to See the Network Information [y,n] ?";
+Message = "Do You Want to See the Network Information [y,N] ?";
 See_Network = Asker(Message);
 
 % Network summary
-switch See_Network
+if See_Network =="y"
 
-    case "y"
-
-        analyzeNetwork(layers, TargetUsage="trainNetwork");
-        clc
+    analyzeNetwork(layers, TargetUsage="trainNetwork");
+    clc
 
 end
 
 % Training the Network
-% CNNModel = trainNetwork(Train_Data, layers, options);
+CNNModel = trainNetwork(Train_Data, layers, options);
 %% The End :)

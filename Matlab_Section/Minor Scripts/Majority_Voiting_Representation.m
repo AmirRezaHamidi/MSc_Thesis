@@ -1,5 +1,6 @@
-Error_Probablity = 0.2;
-N = 20;
+Error_Probablity = 0.3;
+N = 50;
+Mode_of_Plot = "E";
 
 Event_Occurance = 1 : 2 : N;
 Majority_Voting_Probablities = zeros(length(Event_Occurance), 1);
@@ -28,12 +29,21 @@ for i = 1 : 2 : N
 
 end
 
-text_to_show = num2str(Majority_Voting_Probablities) + "%";
+y_label = 'Error';
+
+if Mode_of_Plot == "A"
+
+    Majority_Voting_Probablities = 100 - Majority_Voting_Probablities;
+    y_label = "Accuracy";
+
+end 
+
+text_to_show = num2str(round(Majority_Voting_Probablities, 2)) + "%";
 bar(Event_Occurance, Majority_Voting_Probablities)
 text(Event_Occurance, Majority_Voting_Probablities, text_to_show,...
     'vert','bottom','horiz','center');
 
 xlabel('Number of Samples to take vote')
-ylabel('Accuracy %')
+ylabel(y_label)
 box off
 %% The End :)

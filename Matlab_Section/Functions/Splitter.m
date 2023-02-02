@@ -1,33 +1,33 @@
-function Data_Splitted = Splitter(Data, Sample_Size, Channel_Division)
+function Data_Splitted = Splitter(Data, Sample_Size, Depth)
 
 Fs = 256;
 Overall_Data_Size = 0;
-Forged_Data = containers.Map();
+Forged_Data = struct();
 
-for key = string(Data.keys)
+for i = 1:length(Data)
+    
+    First_Size = size(Data(i).Values, 1);
+    Channel_Aggregate = Advanced_Division(First_Size, Depth);
 
-    First_Size = size(Data(key), 1);
-    Channel_Aggregate = Advanced_Division(First_Size, Channel_Division);
-
-    Second_Size = size(Data(key), 2);
+    Second_Size = size(Data(i).Values, 2);
     Overall_Data_Size = Overall_Data_Size + Second_Size;
-    Forged_Data(key) = Channel_Forger(Data(key), Channel_Aggregate);
+    Forged_Data(i).Values = Channel_Forger(Data(i).Values, Channel_Aggregate);
 
 end
 
-Overall_Data = zeros(Channel_Division , Overall_Data_Size);
+Overall_Data = zeros(Depth , Overall_Data_Size);
 Start = 1;
 
-for key = string(Forged_Data.keys)
-
-    End = size(Forged_Data(key), 2) + Start - 1;
-    Overall_Data(:, Start:End) = Forged_Data(key);
+for i = 1:length(Forged_Data)
+    
+    End = size(Forged_Data(i).Values, 2) + Start -1;
+    Overall_Data(:, Start:End) = Forged_Data(i).Values;
     Start  = End + 1;
-
+    
 end
 
 Sample_Numbers = floor(Overall_Data_Size / (Fs * Sample_Size));
-Data_Splitted = ones(Sample_Numbers, Channel_Division, (Fs * Sample_Size));
+Data_Splitted = ones(Sample_Numbers, Depth, (Fs * Sample_Size));
 
 for i = 0:Sample_Numbers - 1
 
@@ -38,4 +38,5 @@ for i = 0:Sample_Numbers - 1
 end
 
 end
+
 %% The End :)

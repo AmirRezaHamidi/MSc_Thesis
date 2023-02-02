@@ -3,7 +3,7 @@ function [Chosen_Interictals, Chosen_Preictals] = ...
 
 Min_Max_Preictal_Preiod = ...
     Calculate_Min_Max_Preictal_Period(Subjects_Information ,N);
-clc
+clc;
 Message = ['Available Time for ' num2str(N) ' Recording(s):' '\n'...
     num2str(Min_Max_Preictal_Preiod) ' Seconds or ' ...
     num2str(Min_Max_Preictal_Preiod/60) ' Minutes\n'];
@@ -78,11 +78,13 @@ for Subject = 1:N_S
     end
 
     for index = sort(Random_Preictal_Candidate)
+
         Chosen_Preictals(Chosen_Preictal_Index).Subject_Number = ...
             Subject_Number;
         Chosen_Preictals(Chosen_Preictal_Index).Info = ...
             Candidate_Preictals(index).Info;
         Chosen_Preictal_Index = Chosen_Preictal_Index + 1;
+        
     end
 
 end
