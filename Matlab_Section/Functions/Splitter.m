@@ -1,6 +1,22 @@
-function Data_Splitted = Splitter(Data, Sample_Size, Depth)
+function Data_Splitted = Splitter(Data, Sample_Size, Depth, varargin)
 
-Fs = 256;
+if numel(varargin) == 0
+
+    Overlap = 0;
+
+elseif numel(varargin) == 1
+
+    Overlap = varargin{1};
+
+end
+
+if Overlap > Sample_Size
+
+    error("Overlap should smaller than the Sample Size")
+
+end
+
+Sampling_Frequency = 256;
 Overall_Data_Size = 0;
 Forged_Data = struct();
 
@@ -26,13 +42,16 @@ for i = 1:length(Forged_Data)
     
 end
 
-Sample_Numbers = floor(Overall_Data_Size / (Fs * Sample_Size));
-Data_Splitted = ones(Sample_Numbers, Depth, (Fs * Sample_Size));
+Shift = Sample_Size - Overlap;
+Number_of_Starts = (Overall_Data_Size / Sampling_Frequency) - Overlap;
+Number_of_Samples = floor(Number_of_Starts / Shift) - 1;
+Data_Splitted = ones(Number_of_Samples, Depth,...
+                    (Sampling_Frequency * Sample_Size));
 
-for i = 0:Sample_Numbers - 1
+for i = 0:Number_of_Samples
 
-    Start = (i * (Fs * Sample_Size) + 1);
-    End = (i + 1) * (Fs * Sample_Size);
+    Start = i * Shift * Sampling_Frequency + 1;
+    End = Start + Sample_Size * Sampling_Frequency - 1;
     Data_Splitted(i + 1, :, :) = Overall_Data(:, Start:End);
 
 end

@@ -53,7 +53,7 @@ Processed_PR = Reader(PF_PR);
 clear PF_IN PF_PR
 %% Splitting Data
 % Splitted Data Properties
-Sample_Size = 8; Depth = 3;
+Sample_Size = 8; Depth = 3; Overlap = 4;
 
 % % Splitting PR Data into two 8 Seconds Half
 % Splitted_PR_One_First = Half_Splitter(Processed_PR, 1, "First");
@@ -72,8 +72,8 @@ Sample_Size = 8; Depth = 3;
 % Splitted_PR_Eight_Second = Half_Splitter(Processed_PR, 8, "Second");
 
 % Splitting Data to the Seconds Value Intervals
-Splitted_IN = Splitter(Processed_IN, Sample_Size, Depth);
-Splitted_PR = Splitter(Processed_PR, Sample_Size, Depth);
+Splitted_IN = Splitter(Processed_IN, Sample_Size, Depth, Overlap);
+Splitted_PR = Splitter(Processed_PR, Sample_Size, Depth, Overlap);
 
 %% Creating SPWVD Images
 
@@ -138,12 +138,12 @@ if Produce_Network_Data == "y"
 %     %%%%%%%%%% 8 Minutes Pridiction Data %%%%%%%%%%
 % 
     %%%%%%%% Detection Data %%%%%%%%%%
-    NF_IN = fullfile("Network_Data\Detection_Subject\IN\");
-    NF_PR = fullfile("Network_Data\Detection_Subject\PR\");
+    NF_IN = fullfile("Network_Data\Detection_SubjectWise\IN\");
+    NF_PR = fullfile("Network_Data\Detection_SubjectWise\PR\");
     Make_Sure(NF_IN ,NF_PR)
 
-%     SPWVD_Forger(Splitted_IN, NF_IN, Image_Size)
-    SPWVD_Forger(Splitted_PR, NF_PR, Image_Size)
+    SPWVD_Forger(Splitted_IN, NF_IN, Image_Size, true)
+    SPWVD_Forger(Splitted_PR, NF_PR, Image_Size, true)
 
     clear NF_IN NF_PR
     %%%%%%%%% Detection Data %%%%%%%%%%
