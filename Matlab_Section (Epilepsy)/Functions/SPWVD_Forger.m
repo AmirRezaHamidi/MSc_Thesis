@@ -1,8 +1,18 @@
-function SPWVD_Forger(Data, Folder, Image_Size, Subject_Wise)
+function SPWVD_Forger(Data, Folder, Image_Size, options)
+
+arguments
+
+    Data
+    Folder
+    Image_Size
+    options.Subject_Wise = false
+
+end
 
 Time_window = kaiser(31, 5);
 Frequency_Window = kaiser(63, 5);
 
+Subject_Wise = options.Subject_Wise;
 Number_of_Samples = size(Data, 1);
 Sample_Length = size(Data, 3);
 Depth = Image_Size(3); 
@@ -20,7 +30,7 @@ if Subject_Wise
     
     % SubjectWise
     for i = 1:Number_of_Samples
-
+        
         for j = 1:Depth
 
             Signal = reshape(Data(i, j, :), [1, Sample_Length]);
@@ -34,7 +44,7 @@ if Subject_Wise
 
         Initial_Image = getframe(gcf).cdata;
         Cropped_Image = Cropper(Initial_Image);
-        Image = imresize(Cropped_Image, Resize_Scale);
+        Image_Size = imresize(Cropped_Image, Resize_Scale);
         
         Subject_Counter = floor((i-1)/240) + 1;
         Sample_Number = num2str(i, Format_String);
@@ -42,35 +52,36 @@ if Subject_Wise
         Address = Folder + "P_" + num2str(Subject_Counter, "%02.0f") +...
             "\" + Sample_Number + ".jpg";
         disp(Sample_Number)
-        imwrite(Image, Address)
+        
 
+        
+        imwrite(Image_Size, Address)
+        
     end
 
 else
     
     % Overall
     for i = 1:Number_of_Samples
-        
+
         for j = 1:Depth
 
             Signal = reshape(Data(i, j, :), [1, Sample_Length]);
             Mold(:, : , j) = wvd(Signal, "smoothedPseudo", ...
                 Time_window, Frequency_Window);
-
         end
-        
+
         image(Mold)
         axis off
         
         Initial_Image = getframe(gcf).cdata;
         Cropped_Image = Cropper(Initial_Image);
-        Image = imresize(Cropped_Image, Resize_Scale);
+        Image_Size = imresize(Cropped_Image, Resize_Scale);
         
         Sample_Number = num2str(i, Format_String);
         Address = Folder + Sample_Number + ".jpg";
-        
-        imwrite(Image, Address)
-        
+        imwrite(Image_Size, Address)
+
     end
     
 end

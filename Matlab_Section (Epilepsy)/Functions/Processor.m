@@ -23,7 +23,7 @@ for i = Input_Batch
     elseif Condition_2
         
         EEG = pop_biosig(Path, 'channels', (1:22));
-        Data = EEG.data * 1e4;
+        Data = EEG.data;
         Cropped_Data = ...
             Seizure_Detector(Data, Recording_Info, Recordings_Length);
         save(Output_Folder + (Path(24:31)) , "Cropped_Data");
