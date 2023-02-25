@@ -2,7 +2,9 @@ Matlab_Section (Epilepsy)/Dataset/
 Matlab_Section (Epilepsy)/EEGLAB/
 Matlab_Section (Epilepsy)/Network_Data/
 Matlab_Section (Epilepsy)/processed_Data/
-Matlab_Section (Epilepsy)/Results
+Matlab_Section (Epilepsy)/Results/
+
+Matlab_Section (Parkinson)/Dataset/
 Matlab_Section (Parkinson)/EEGLAB/
 Matlab_Section (Parkinson)/Network_Data/
 Matlab_Section (Parkinson)/Processed_Data/
