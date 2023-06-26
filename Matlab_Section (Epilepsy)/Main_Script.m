@@ -1,8 +1,8 @@
 %% Resovling Environment
 addpath("Functions")
 Resolve_Environment
-close all; clear; clc
-h
+% close all; clear; clc
+
 %% Loading and Choosing the Raw Data Information
 % Loading the Data
 load("Dataset\Subjects_Information.mat")
