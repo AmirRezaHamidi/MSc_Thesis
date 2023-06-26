@@ -1,7 +1,7 @@
 %% Resovling Environment
 addpath("Functions")
 Resolve_Environment
-close all; clear; clc
+% close all; clear; clc
 
 %% Processing the Raw Data
 Processed_Directory = fullfile("Processed_Data");
@@ -52,13 +52,13 @@ Processed_PD = Reader(PD_PD);
 clear PD_HC PD_PD
 
 % Splitting Data Properties
-Sample_Size = 2; Depth = 3; Overlap = 0;
+Epoch_Size = 2; Depth = 3; Overlap = 0;
 
 % Splitting Data
-Splitted_HC = Splitter(Processed_HC, Sample_Size, Depth, Overlap=Overlap);
-Splitted_PD = Splitter(Processed_PD, Sample_Size, Depth, Overlap=Overlap);
+Splitted_HC = Splitter(Processed_HC, Epoch_Size, Depth, Overlap=Overlap);
+Splitted_PD = Splitter(Processed_PD, Epoch_Size, Depth, Overlap=Overlap);
 
-clear Sample_Size Depth Overlap Processed_HC Processed_PD
+clear Epoch_Size Depth Overlap Processed_HC Processed_PD
 %% Creating Forged Data
 
 Network_Directory = fullfile("Network_Data\");

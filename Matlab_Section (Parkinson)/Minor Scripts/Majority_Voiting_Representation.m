@@ -1,6 +1,6 @@
-Error_Probablity = 0.3;
-N = 50;
-Mode_of_Plot = "E";
+Error_Probablity = 0.4;
+N = 160;
+Mode_of_Plot = "A";
 
 Event_Occurance = 1 : 2 : N;
 Majority_Voting_Probablities = zeros(length(Event_Occurance), 1);

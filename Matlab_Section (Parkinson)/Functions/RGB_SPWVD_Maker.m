@@ -25,7 +25,7 @@ for i = 1:length(Data)
 
 end
 Total_Samples = All_Subjects_Samples(end) - 1;
-Disp("The Number of All Samples for All Subject is Equal")
+disp("The Number of All Samples for All Subject is Equal")
 disp(Total_Samples)
 
 Time_window = kaiser(31, 5);
